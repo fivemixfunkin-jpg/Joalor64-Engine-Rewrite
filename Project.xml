@@ -19,9 +19,13 @@
 	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" /> <!-- macOS -->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/> <!-- Mobile -->
 
+	<!-- [ Mobile Configuration ] -->
+
+	<config :android install-location="auto" permissions="INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,MANAGE_EXTERNAL_STORAGE" />
+
 	<!-- [ Custom Defines ] -->
 
-	<section if="desktop">
+	<section if="desktop || mobile">
 		<define name="MODS_ALLOWED" />
 		<define name="LUA_ALLOWED" />
 		<define name="HSCRIPT_ALLOWED" />
@@ -30,10 +34,10 @@
 	</section>
 	<define name="PSYCH" /> <!-- For the fnf-modcharting-tools library -->
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits" />
+	<define name="VIDEOS_ALLOWED" if="web || windows || android || ios" unless="32bits" />
 	<define name="JOALOR64_WATERMARKS" />
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS" />
-	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="CRASH_HANDLER" if="desktop || mobile" />
 
 	<!-- [ Path Settings ] -->
 
@@ -77,7 +81,7 @@
 
 	<haxelib name="extension-webm" if="WEBM_ALLOWED" /> 
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
-	<!--<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />--> <!-- if you want to use hxvlc instead -->
+	<haxelib name="extension-androidtools" if="android" />
 
 	<haxelib name="linc_discord-rpc" if="desktop" />
 	<haxelib name="hxcpp-debug-server" if="desktop debug" />
@@ -126,6 +130,7 @@
 		${flixel == 5.0.1} ||
 		${flixel == 5.0.2} ||
 		${flixel == 5.1.0} ||
+		${flixel == 5.1.1} ||
 		${flixel == 5.2.0} ||
 		${flixel == 5.2.1}" />
 
@@ -148,7 +153,7 @@
 
 	<!-- [ Icons ] -->
 
-	<assets path='art/iconOG.png' rename='icon.png' if="linux || mac" /> <!-- icon workaround for linux/mac -->
+	<assets path='art/iconOG.png' rename='icon.png' if="linux || mac" />
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>
@@ -157,9 +162,9 @@
 	<!-- [ Miscellaneous ] -->
 
 	<target id="haxe" tool="linker" if="linux">
-		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" /> <!-- linux support -->
+		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" />
 	</target> 
 	<target id="haxe" tool="linker" if="macos">
-		<lib name="/lib64/libX11.a" if="HXCPP_M64" /> <!-- mac support -->
+		<lib name="/lib64/libX11.a" if="HXCPP_M64" />
 	</target>
 </project>
