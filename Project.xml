@@ -36,6 +36,7 @@
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows || android || ios" unless="32bits" />
 	<define name="JOALOR64_WATERMARKS" />
+	<define name="DISCORD_ALLOWED" if="desktop" />
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS" />
 	<define name="CRASH_HANDLER" if="desktop || mobile" />
 

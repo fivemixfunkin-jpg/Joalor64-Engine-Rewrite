@@ -1,6 +1,6 @@
 package meta.data.dependency;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
 

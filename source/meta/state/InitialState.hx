@@ -102,7 +102,7 @@ class InitialState extends FlxState
 		if (FlxG.save.data.socialCredit == null) FlxG.save.data.socialCredit = 0;
 
 		FlxG.mouse.visible = false;
-		#if desktop
+		#if DISCORD_ALLOWED
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();

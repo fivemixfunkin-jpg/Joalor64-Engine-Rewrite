@@ -12,7 +12,7 @@ class SocialCreditState extends MusicBeatState
 	{
 		super.create();
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Social Credit Menu", null);
 		#end
 

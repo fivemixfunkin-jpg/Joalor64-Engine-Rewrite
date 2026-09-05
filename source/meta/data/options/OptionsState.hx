@@ -45,7 +45,7 @@ class OptionsState extends MusicBeatState
 	var bg:FlxSprite;
 
 	override function create() {
-		#if desktop
+		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 		

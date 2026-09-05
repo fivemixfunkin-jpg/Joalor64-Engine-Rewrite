@@ -53,7 +53,7 @@ import openfl.utils.Assets;
 // Joalor64 Engine Imports
 import animateatlas.AtlasFrameMaker;
 
-#if desktop
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
 #end
 import meta.data.alphabet.Alphabet;

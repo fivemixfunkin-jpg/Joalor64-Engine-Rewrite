@@ -198,7 +198,9 @@ class Main extends Sprite
 
 		FlxG.sound.play(Paths.sound('crash'));
 
+		#if DISCORD_ALLOWED
 		DiscordClient.shutdown();
+		#end
 
 		Lib.application.window.alert('Uncaught Error: \n' + msg + '\n\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues', 'Error!');
 		LimeSystem.exit(1);

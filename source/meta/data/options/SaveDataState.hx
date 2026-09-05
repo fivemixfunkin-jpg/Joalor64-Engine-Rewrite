@@ -17,7 +17,7 @@ class SaveDataState extends MusicBeatState
 	{
 		super.create();
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Save Data Menu", null);
 		#end
 

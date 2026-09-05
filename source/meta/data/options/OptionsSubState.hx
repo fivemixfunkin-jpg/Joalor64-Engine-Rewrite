@@ -342,7 +342,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
     {
         super();
 
-        #if desktop
+        #if DISCORD_ALLOWED
 		DiscordClient.changePresence("Modpacks Options Saves Menu", null);
 		#end
 
@@ -1603,13 +1603,11 @@ class VisualsSubState extends BaseOptionsMenu
 	}
 	#end
 
-	#if !mobile
 	function onChangeFPSCounter()
 	{
 		if(Main.fpsVar != null)
 			Main.fpsVar.visible = ClientPrefs.showFPS;
 	}
-	#end
 
 	function onChangeAntiAliasing()
 	{
