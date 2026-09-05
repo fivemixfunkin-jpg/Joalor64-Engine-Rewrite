@@ -1,4 +1,4 @@
-name: Mobile Builds (APK & IPA)
+name: Build iOS IPA
 
 on:
   push:
@@ -6,57 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-android:
-    name: Build Android APK
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install Haxe Libraries
-        run: |
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec || true
-          haxelib git extension-videoview https://github.com/Joalor64/extension-videoview || true
-
-      - name: Configure Lime Android
-        run: |
-          haxelib run lime config ANDROID_SDK $ANDROID_HOME
-          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_LATEST_HOME
-          haxelib run lime config JAVA_HOME $JAVA_HOME
-
-      - name: Build Android APK
-        run: haxelib run lime build android -release
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Android-APK
-          path: export/release/android/bin/app/build/outputs/apk/release/*.apk
-
   build-ios:
-    name: Build iOS IPA
     runs-on: macos-13
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Haxe
@@ -71,20 +25,22 @@ jobs:
           haxelib install flixel 5.6.1
           haxelib run lime setup flixel
           haxelib run lime setup
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec || true
+          haxelib install hxCodec 3.0.2 || true
+          haxelib git faxe https://github.com/as3boyan/faxe || true
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc || true
 
-      - name: Build iOS Xcode Project
+      - name: Compile iOS Xcode Project
         run: haxelib run lime build ios -release
 
-      - name: Package Unsigned IPA
+      - name: Build IPA with Xcode
         run: |
           cd export/release/ios/build/Release-iphoneos
           mkdir -p Payload
-          mv *.app Payload/ 2>/dev/null || true
-          zip -r ../../../../Joalor64Engine-unsigned.ipa Payload
+          cp -r *.app Payload/
+          zip -r -9 output.ipa Payload
 
       - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: iOS-IPA-Unsigned
-          path: Joalor64Engine-unsigned.ipa
+          name: iOS-Build
+          path: export/release/ios/build/Release-iphoneos/output.ipa
