@@ -80,7 +80,8 @@
 	<haxelib name="parallaxlt" />
 
 	<haxelib name="extension-webm" if="WEBM_ALLOWED" /> 
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" unless="ios" />
+	<haxelib name="hxvlc" if="VIDEOS_ALLOWED ios" />
 	<haxelib name="extension-androidtools" if="android" />
 
 	<haxelib name="linc_discord-rpc" if="desktop" />
