@@ -21,7 +21,7 @@
 
 	<!-- [ Mobile Configuration ] -->
 
-	<config :android install-location="auto" permissions="INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,MANAGE_EXTERNAL_STORAGE" />
+	<config:android install-location="auto" minimum-sdk-version="21" target-sdk-version="36" permissions="android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_EXTERNAL_STORAGE android.permission.INTERNET" />
 
 	<!-- [ Custom Defines ] -->
 
