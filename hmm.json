@@ -44,7 +44,7 @@
     },
     {
       "name": "hxvlc",
-      "type": "haxelib",
+      "type": "haxelib"
     },
     {
       "name": "fnf-modcharting-tools",
