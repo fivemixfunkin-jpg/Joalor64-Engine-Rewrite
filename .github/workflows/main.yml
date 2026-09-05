@@ -20,12 +20,8 @@ jobs:
 
       - name: Install Haxe Libraries
         run: |
-          haxelib install lime 8.1.2 --quiet
-          haxelib install openfl 9.3.3 --quiet
-          haxelib install flixel 5.6.1 --quiet
-          haxelib install hxvlc --quiet
-          haxelib git faxe https://github.com/as3boyan/faxe --quiet
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
 
       - name: Compile iOS Xcode Project
         run: haxelib run lime build ios -release -nosign
