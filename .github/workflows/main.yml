@@ -14,23 +14,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1
+        uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.3.3
+          haxe-version: 4.3.7
 
       - name: Install Haxe Libraries
         run: |
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install hxCodec 3.0.2 || true
-          haxelib git faxe https://github.com/as3boyan/faxe || true
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc || true
+          haxelib install lime 8.1.2 --quiet
+          haxelib install openfl 9.3.3 --quiet
+          haxelib install flixel 5.6.1 --quiet
+          haxelib install hxvlc --quiet
+          haxelib git faxe https://github.com/as3boyan/faxe --quiet
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
 
       - name: Compile iOS Xcode Project
-        run: haxelib run lime build ios -release
+        run: haxelib run lime build ios -release -nosign
 
       - name: Build IPA with Xcode
         run: |
@@ -43,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iOS-Build
-          path: export/release/ios/build/Release-iphoneos/output.ipa
+          path: export/release/ios/build/Release-iphoneos/*.ipa
