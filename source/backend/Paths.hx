@@ -546,10 +546,20 @@ class Paths
 	}
 
 	#if MODS_ALLOWED
-	static final modFolderPath:String = "mods/";
+	public static var storagePath(get, never):String;
+
+	private static function get_storagePath():String {
+		#if android
+		return lime.system.System.applicationStorageDirectory;
+		#elseif ios
+		return lime.system.System.documentsDirectory;
+		#else
+		return '';
+		#end
+	}
 
 	inline static public function mods(key:String = '')
-		return modFolderPath + key;
+		return storagePath + "mods/" + key;
 
 	inline static public function modsFont(key:String)
 		return modFolders('fonts/$key');
@@ -590,7 +600,7 @@ class Paths
 			if (FileSystem.exists(mods('$mod/$key')))
 				return mods('$mod/$key');
 		
-		return 'mods/$key';
+		return 'mods($key';
 	}
 	#end
 }
